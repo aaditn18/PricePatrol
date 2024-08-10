@@ -9,9 +9,10 @@ import { User } from "@/types";
 import { generateEmailBody, sendEmail } from "../nodemailer";
 
 
+
 export async function scrapeAndStoreProduct(productUrl:string) {
     if(!productUrl){
-        return;
+        return null;
     }
 
     try {
@@ -59,6 +60,7 @@ export async function scrapeAndStoreProduct(productUrl:string) {
         );
 
         revalidatePath(`/products/${newProduct._id}`);
+        return `/products/${newProduct._id}`;
 
     }  catch(error: any) {
         const scrapedProduct = await scrapeAmazonProduct(productUrl)
