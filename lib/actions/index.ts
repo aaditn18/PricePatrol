@@ -23,14 +23,9 @@ export async function scrapeAndStoreProduct(productUrl:string) {
 
         if (!scrapedProduct) return;
 
-        // Check for stars value
-        if (scrapedProduct.stars === undefined) {
-            console.warn('Stars value is missing in scraped product');
-        }
 
         let product = {
             ...scrapedProduct,
-            stars: scrapedProduct.stars || null // Use stars if available, otherwise set to null
         };
 
         const existingProduct = await Product.findOne({ url: scrapedProduct.url });
@@ -46,8 +41,8 @@ export async function scrapeAndStoreProduct(productUrl:string) {
                 priceHistory: updatedPriceHistory,
                 lowestPrice: getLowestPrice(updatedPriceHistory),
                 highestPrice: getHighestPrice(updatedPriceHistory),
-                averagePrice: getAveragePrice(updatedPriceHistory),
-                stars: scrapedProduct.stars || existingProduct.stars // Retain existing stars if not available
+                averagePrice: getAveragePrice(updatedPriceHistory)
+                
             };
         }
 
