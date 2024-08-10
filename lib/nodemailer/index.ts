@@ -93,7 +93,7 @@ export async function generateEmailBody(product: EmailProductInfo, type: Notific
   const transporter = nodemailer.createTransport({
     host: 'smtp.office365.com',
     port: 587,
-    secure: false, // Set to true if using port 465
+    secure: false, // Set true if using port 465
     auth: {
         user: 'price_patrol_anilay@outlook.com',
         pass: process.env.EMAIL_PASSWORD // Ensure this is set correctly
