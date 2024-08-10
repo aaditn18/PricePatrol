@@ -90,28 +90,40 @@ export async function generateEmailBody(product: EmailProductInfo, type: Notific
   //   maxConnections: 1
   // })
 
-const transporter = nodemailer.createTransport({
-  host: 'smtp.office365.com',
-  port: 587,
-  secure: false, // Set to true if using port 465
-  auth: {
-    user: 'price_patrol_anilay@outlook.com',
-    pass: process.env.EMAIL_PASSWORD // Ensure this is set correctly
-  },
-  tls: {
-    ciphers: 'SSLv3'
-  }
+  const transporter = nodemailer.createTransport({
+    host: 'smtp.office365.com',
+    port: 587,
+    secure: false, // Set to true if using port 465
+    auth: {
+        user: 'price_patrol_anilay@outlook.com',
+        pass: process.env.EMAIL_PASSWORD // Ensure this is set correctly
+    },
+    tls: {
+        ciphers: 'SSLv3'
+    }
 });
 
-  export const sendEmail = async(emailContent: EmailContent, sendTo: string[]) => {
+export const sendEmail = async (emailContent: EmailContent, sendTo: string[]) => {
     const mailOptions = {
-        from:'price_patrol_anilay@outlook.com',
+        from: 'price_patrol_anilay@outlook.com',
         to: sendTo,
         html: emailContent.body,
         subject: emailContent.subject
+    };
+
+    try {
+        await new Promise((resolve, reject) => {
+            transporter.sendMail(mailOptions, (error: any, info: any) => {
+                if (error) {
+                    console.log(error);
+                    reject(error);
+                } else {
+                    console.log('Email sent: ', info);
+                    resolve(info);
+                }
+            });
+        });
+    } catch (error) {
+        console.error('Failed to send email:', error);
     }
-    transporter.sendMail(mailOptions, (error:any, info:any) => {
-        if(error) return console.log(error);
-        console.log('email sent: ', info);
-    })
-  }
+};
