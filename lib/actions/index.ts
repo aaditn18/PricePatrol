@@ -26,6 +26,7 @@ export async function scrapeAndStoreProduct(productUrl:string) {
 
         let product = {
             ...scrapedProduct,
+            stars: typeof scrapedProduct.stars === 'number' && !isNaN(scrapedProduct.stars) ? scrapedProduct.stars : null
         };
 
         const existingProduct = await Product.findOne({ url: scrapedProduct.url });
@@ -41,8 +42,8 @@ export async function scrapeAndStoreProduct(productUrl:string) {
                 priceHistory: updatedPriceHistory,
                 lowestPrice: getLowestPrice(updatedPriceHistory),
                 highestPrice: getHighestPrice(updatedPriceHistory),
-                averagePrice: getAveragePrice(updatedPriceHistory)
-                
+                averagePrice: getAveragePrice(updatedPriceHistory),
+                stars: product.stars || existingProduct.stars
             };
         }
 
