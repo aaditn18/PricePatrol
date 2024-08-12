@@ -87,8 +87,8 @@ export async function scrapeAmazonProduct(url: string) {
             stars: Number($('.a-popover-trigger.a-declarative span.a-size-base.a-color-base').text().trim()),
             isOutOfStock: outOfStock,
             description,
-            lowestPrice: Number(currentPrice) || Number(originalPrice),
-            highestPrice: Number(originalPrice) || Number(currentPrice),
+            lowestPrice: Number(currentPrice) < Number(originalPrice)? Number(currentPrice) : Number(originalPrice),
+            highestPrice: Number(originalPrice) > Number(currentPrice)? Number(originalPrice): Number(currentPrice),
             averagePrice: Number(currentPrice) || Number(originalPrice)
         }
         console.log(`data scraped: ${data}`)
