@@ -11,22 +11,33 @@ Email notifications for price drops
 Responsive design for various devices
 Automated price checking using cron jobs
 
+
 ## Tech Stack
 
 Frontend: Next.js, TypeScript, HTML, CSS
+
 Backend: Node.js, Next.js API routes
+
 Database: MongoDB with Mongoose
+
 Authentication: NextAuth.js
+
 Styling: Tailwind CSS
+
 Deployment: Vercel
+
 Web Scraping: Bright Data
+
 Design: Figma
+
 Scheduling: Cron Jobs
+
 
 ## Getting Started
 
 ### Clone the repository:
 git clone https://github.com/aaditn18/pricepatrol.git
+
 cd pricepatrol
 
 ### Install dependencies:
