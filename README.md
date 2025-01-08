@@ -6,9 +6,13 @@ PricePatrol is a web application that tracks product prices on Amazon and notifi
 ## Features
 
 Track Amazon product prices
+
 User authentication and profile management
+
 Email notifications for price drops
+
 Responsive design for various devices
+
 Automated price checking using cron jobs
 
 
